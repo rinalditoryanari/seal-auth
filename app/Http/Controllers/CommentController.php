@@ -47,7 +47,7 @@ class CommentController extends Controller
             'comment' => $request->comment,
             'user_id' => auth()->id(),
         ]);
-        Mail::to($post->user->email)->send(new PostCommentedMail);
+        Mail::to($post->user->email)->send(new PostCommentedMail($post));
         return redirect()->back();
     }
 

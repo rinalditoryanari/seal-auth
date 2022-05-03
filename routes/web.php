@@ -52,5 +52,5 @@ Route::delete('comment/{id}/destroy', [CommentController::class, 'destroy'])->na
 // Route::resource('comment', CommentController::class);
 
 Route::get('postcommentedmail', function () {
-    return new PostCommentedMail;
+    return new PostCommentedMail(Post::find(1));
 });
