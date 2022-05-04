@@ -24,7 +24,6 @@ class EventServiceProvider extends ServiceProvider
         PostCommented::class => [
             PostCommentedMailListener::class,
             PostCommentedLogListener::class,
-
         ],
     ];
 
