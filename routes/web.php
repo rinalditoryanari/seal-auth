@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Mail\PostCommentedMail;
 use App\Models\Post;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,4 +54,17 @@ Route::delete('comment/{id}/destroy', [CommentController::class, 'destroy'])->na
 
 Route::get('postcommentedmail', function () {
     return new PostCommentedMail(Post::find(1));
+});
+
+Route::get('http', function () {
+    $post = Http::get('https://jsonplaceholder.typicode.com/posts');
+    return $post[80]['id']; 
+});
+
+Route::get('http-bikinresource', function () {
+    return Http::post('https://jsonplaceholder.typicode.com/posts',[
+        'userId' => 100,
+        'title' => 'Title',
+        'body' => 'Postingan Percobaan'
+    ]);
 });
