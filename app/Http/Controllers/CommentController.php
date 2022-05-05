@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCommented;
 use App\Mail\PostCommentedMail;
 use App\Models\Comment;
 use App\Models\Post;
@@ -47,7 +48,8 @@ class CommentController extends Controller
             'comment' => $request->comment,
             'user_id' => auth()->id(),
         ]);
-        Mail::to($post->user->email)->send(new PostCommentedMail);
+        Mail::to($post->user->email)->send(new PostCommentedMail($post));
+        // PostCommented::dispatch($post);
         return redirect()->back();
     }
 

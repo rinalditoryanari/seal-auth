@@ -2,6 +2,7 @@
 # Notifikasi
 
 Postingan kamu mendapatkan komentar baru
+di post "{{$post->body}}"
 
 @component('mail::button', ['url' => ''])
 Lihat postingan

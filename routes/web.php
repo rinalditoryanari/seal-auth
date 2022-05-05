@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Mail\PostCommentedMail;
 use App\Models\Post;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,5 +53,36 @@ Route::delete('comment/{id}/destroy', [CommentController::class, 'destroy'])->na
 // Route::resource('comment', CommentController::class);
 
 Route::get('postcommentedmail', function () {
-    return new PostCommentedMail;
+    return new PostCommentedMail(Post::find(1));
+});
+
+Route::get('http', function () {
+    $post = Http::get('https://jsonplaceholder.typicode.com/posts');
+    return $post[80]['id']; 
+});
+
+Route::get('http-bikinresource', function () {
+    return Http::post('https://jsonplaceholder.typicode.com/posts',[
+        'userId' => 100,
+        'title' => 'Title',
+        'body' => 'Postingan Percobaan'
+    ]);
+});
+
+
+Route::get('rajaongkir/prov', function () {
+    return Http::withHeaders([
+       'key' => '14af704b5baa1ca111789f25fd0f5423', 
+    ]) -> get('https://api.rajaongkir.com/starter/province')['rajaongkir']['results'];
+});
+
+Route::get('rajaongkir/cost', function () {
+    return Http::withHeaders([
+       'key' => '14af704b5baa1ca111789f25fd0f5423', 
+    ]) -> post('https://api.rajaongkir.com/starter/cost',[
+        'origin' => 248,
+        'destination' => 154,
+        'weight' => 100,
+        'courier' => 'jne',
+    ])['rajaongkir']['results'];
 });
