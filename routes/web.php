@@ -72,13 +72,13 @@ Route::get('http-bikinresource', function () {
 
 Route::get('rajaongkir/prov', function () {
     return Http::withHeaders([
-       'key' => '14af704b5baa1ca111789f25fd0f5423', 
+        'key' => '14af704b5baa1ca111789f25fd0f5423', 
     ]) -> get('https://api.rajaongkir.com/starter/province')['rajaongkir']['results'];
 });
 
 Route::get('rajaongkir/cost', function () {
     return Http::withHeaders([
-       'key' => '14af704b5baa1ca111789f25fd0f5423', 
+        'key' => '14af704b5baa1ca111789f25fd0f5423', 
     ]) -> post('https://api.rajaongkir.com/starter/cost',[
         'origin' => 248,
         'destination' => 154,
